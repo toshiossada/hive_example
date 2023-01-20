@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import 'home_controller.dart';
 
@@ -33,7 +34,15 @@ class _HomePageState extends State<HomePage> {
               child: const Text('Load'),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                await controller.getRegisterPerPage();
+              },
+              child: const Text('Load Per Page'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Modular.to.pushNamed('list');
+              },
               child: const Text('Filter'),
             ),
             ValueListenableBuilder(

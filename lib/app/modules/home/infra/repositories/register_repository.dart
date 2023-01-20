@@ -6,25 +6,27 @@ import 'package:hive_discovery/app/modules/home/domain/repositories/register_rep
 import 'package:hive_discovery/app/modules/home/register_isolate_module.dart';
 
 import 'datasources/register_datasource_interface.dart';
-import 'datasources/register_local_database_interface.dart';
 import 'models/register_model.dart';
 
 class RegisterRepository implements IRegisterRepository {
   final IRegisterDatasource datasource;
-  final IRegisterLocalDatasource registerLocalDatasource;
   final BaseMapper<RegisterEntity, RegisterModel> mapper;
 
   RegisterRepository({
     required this.datasource,
     required this.mapper,
-    required this.registerLocalDatasource,
   });
 
   @override
+  Future<List<RegisterEntity>> getRegistersPerPage(int page) async {
+    final result = await datasource.getRegisters();
+
+    return result.map((e) => mapper.toEntity(e)).toList();
+  }
+
+  @override
   Future<List<RegisterEntity>> getRegisters() async {
-//    final result = await datasource.getRegisters();
     final result = await compute(_searchRegisters, {});
-    await registerLocalDatasource.add(result);
 
     return result.map((e) => mapper.toEntity(e)).toList();
   }
@@ -38,6 +40,7 @@ class RegisterRepository implements IRegisterRepository {
     for (var i = 0; i < 1000; i++) {
       final d = await datasource.getRegisters();
       data.addAll(d.map((e) => e.copyWith(id: i)));
+      print('$i - ${data.length}');
     }
 
     return data;

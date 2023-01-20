@@ -24,6 +24,7 @@ class RegisterLocalDatasource implements IRegisterLocalDatasource {
     if (!completer.isCompleted) completer.complete(box);
   }
 
+  @override
   Future clear() async {
     final box = await completer.future;
     await box.clear();
@@ -35,8 +36,9 @@ class RegisterLocalDatasource implements IRegisterLocalDatasource {
         registers.map((e) => RegisterModelDatabase.fromModel(e)).toList();
 
     final box = await completer.future;
-
+    await clear();
     box.add(model);
+    model.map((e) => e.save());
   }
 
   @override
