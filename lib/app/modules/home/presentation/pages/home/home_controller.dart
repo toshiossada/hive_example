@@ -1,5 +1,6 @@
 import 'dart:isolate';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -35,11 +36,13 @@ class HomeController {
     );
 
     port.listen((message) {
-      print('$message%');
       if (message is List<RegisterEntity>) {
+        debugPrint('DONE');
         isolate.kill(priority: Isolate.immediate);
         loading.value = false;
         registerLocalDatabaseUsecase(message);
+      } else {
+        debugPrint('$message%');
       }
     });
   }
@@ -58,6 +61,3 @@ class HomeController {
     sendPort.send(registers);
   }
 }
-
-
-//GetRegisterPerPage

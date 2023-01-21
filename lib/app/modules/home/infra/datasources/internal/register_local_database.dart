@@ -37,19 +37,21 @@ class RegisterLocalDatasource implements IRegisterLocalDatasource {
 
     final box = await completer.future;
     await clear();
-    box.add(model);
-    model.map((e) => e.save());
+    //await box.put('registers', model);
+    await box.addAll(model);
+    model.map((e) async => await e.save());
   }
 
   @override
   Future<List<RegisterModel>> get() async {
     final box = await completer.future;
-    final result = (box.values.first as List)
-        .map<RegisterModelDatabase>((e) => e)
-        .toList();
 
-    return result.map((e) {
-      return e.toModel();
+    //final registers = box.get('registers');
+    final registers = box.values.toList();
+    final result = registers.map((e) {
+      return (e as RegisterModelDatabase).toModel();
     }).toList();
+
+    return result;
   }
 }

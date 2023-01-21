@@ -5,8 +5,8 @@ import 'package:hive_discovery/app/modules/home/domain/entities/register_entity.
 import 'package:hive_discovery/app/modules/home/domain/repositories/register_repository_interface.dart';
 import 'package:hive_discovery/app/modules/home/register_isolate_module.dart';
 
-import 'datasources/register_datasource_interface.dart';
 import '../models/register_model.dart';
+import 'datasources/register_datasource_interface.dart';
 
 class RegisterRepository implements IRegisterRepository {
   final IRegisterDatasource datasource;
@@ -37,10 +37,10 @@ class RegisterRepository implements IRegisterRepository {
     final datasource = Modular.get<IRegisterDatasource>();
 
     final data = <RegisterModel>[];
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 500; i++) {
       final d = await datasource.getRegisters();
       data.addAll(d.map((e) => e.copyWith(id: i)));
-      print('$i - ${data.length}');
+      debugPrint('$i - ${data.length}');
     }
 
     return data;

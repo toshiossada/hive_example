@@ -3,14 +3,16 @@ import 'package:hive_discovery/app/modules/home/infra/models/register_model.dart
 
 part 'register_model_database.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 class RegisterModelDatabase extends HiveObject {
+  @HiveField(0, defaultValue: 0)
   final int id;
+  @HiveField(1, defaultValue: '')
   final String name;
 
   RegisterModelDatabase({
-    this.id = 0,
-    this.name = '',
+    required this.id,
+    required this.name,
   });
 
   factory RegisterModelDatabase.fromModel(RegisterModel model) {

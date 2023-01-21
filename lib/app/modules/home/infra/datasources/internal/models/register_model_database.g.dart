@@ -8,7 +8,7 @@ part of 'register_model_database.dart';
 
 class RegisterModelDatabaseAdapter extends TypeAdapter<RegisterModelDatabase> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
   RegisterModelDatabase read(BinaryReader reader) {
@@ -16,12 +16,20 @@ class RegisterModelDatabaseAdapter extends TypeAdapter<RegisterModelDatabase> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return RegisterModelDatabase();
+    return RegisterModelDatabase(
+      id: fields[0] == null ? 0 : fields[0] as int,
+      name: fields[1] == null ? '' : fields[1] as String,
+    );
   }
 
   @override
   void write(BinaryWriter writer, RegisterModelDatabase obj) {
-    writer.writeByte(0);
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name);
   }
 
   @override
