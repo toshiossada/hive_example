@@ -3,7 +3,7 @@ import 'package:hive_discovery/app/modules/home/domain/entities/register_entity.
 
 import '../../domain/repositories/local_register_repository.dart';
 import 'datasources/register_local_database_interface.dart';
-import 'models/register_model.dart';
+import '../models/register_model.dart';
 
 class LocalRegisterRepository implements ILocalRegisterRepository {
   final IRegisterLocalDatasource registerLocalDatasource;

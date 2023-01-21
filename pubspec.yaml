@@ -40,6 +40,8 @@ dependencies:
   dio: ^4.0.6
   flutter_modular: ^5.0.3
   path_provider: ^2.0.11
+  asuka: ^2.0.1+3
+  infinite_scroll_pagination: ^3.2.0
 
 dev_dependencies:
   flutter_test:

@@ -6,7 +6,7 @@ import 'package:hive_discovery/app/modules/home/domain/repositories/register_rep
 import 'package:hive_discovery/app/modules/home/register_isolate_module.dart';
 
 import 'datasources/register_datasource_interface.dart';
-import 'models/register_model.dart';
+import '../models/register_model.dart';
 
 class RegisterRepository implements IRegisterRepository {
   final IRegisterDatasource datasource;

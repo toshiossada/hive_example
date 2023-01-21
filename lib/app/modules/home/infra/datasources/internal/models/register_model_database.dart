@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:hive_discovery/app/modules/home/infra/repositories/models/register_model.dart';
+import 'package:hive_discovery/app/modules/home/infra/models/register_model.dart';
 
 part 'register_model_database.g.dart';
 

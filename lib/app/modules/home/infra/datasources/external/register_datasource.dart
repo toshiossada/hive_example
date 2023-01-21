@@ -1,6 +1,6 @@
 import '../../../../../commons/adapters/http_client/http_client_adapter.dart';
 import '../../repositories/datasources/register_datasource_interface.dart';
-import '../../repositories/models/register_model.dart';
+import '../../models/register_model.dart';
 
 class RegisterDatasource implements IRegisterDatasource {
   final IHttpClientAdapter client;

@@ -1,4 +1,4 @@
-import '../models/register_model.dart';
+import '../../models/register_model.dart';
 
 abstract class IRegisterLocalDatasource {
   Future<List<RegisterModel>> get();

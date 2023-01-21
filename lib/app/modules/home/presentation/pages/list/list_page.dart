@@ -20,7 +20,12 @@ class _ListPageState extends State<ListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('List'),
+        title: ValueListenableBuilder(
+          valueListenable: controler.list,
+          builder: (__, List<RegisterEntity> value, _) {
+            return Text('${value.length} Registros');
+          },
+        ),
       ),
       body: Column(
         children: [
@@ -37,14 +42,19 @@ class _ListPageState extends State<ListPage> {
           ),
           ValueListenableBuilder(
             valueListenable: controler.list,
-            builder: (BuildContext context, List<RegisterEntity> value, _) {
+            builder: (__, List<RegisterEntity> value, _) {
               return Expanded(
                 child: ListView.builder(
                     itemCount: value.length,
                     itemBuilder: (BuildContext context, int index) {
                       final item = value[index];
-                      return ListTile(
-                        title: Text(item.name),
+                      return ColoredBox(
+                        color: index % 2 == 0
+                            ? Colors.green.withOpacity(.3)
+                            : Colors.purple.withOpacity(.3),
+                        child: ListTile(
+                          title: Text(item.name),
+                        ),
                       );
                     }),
               );

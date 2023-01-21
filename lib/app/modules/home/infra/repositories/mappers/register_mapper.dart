@@ -1,6 +1,6 @@
 import 'package:hive_discovery/app/commons/base_mapper.dart';
 import 'package:hive_discovery/app/modules/home/domain/entities/register_entity.dart';
-import 'package:hive_discovery/app/modules/home/infra/repositories/models/register_model.dart';
+import 'package:hive_discovery/app/modules/home/infra/models/register_model.dart';
 
 class RegisterMapper implements BaseMapper<RegisterEntity, RegisterModel> {
   @override

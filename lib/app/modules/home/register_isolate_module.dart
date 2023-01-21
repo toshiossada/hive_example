@@ -8,9 +8,9 @@ import 'domain/repositories/register_repository_interface.dart';
 import 'domain/usecases/get_register_per_page.dart';
 import 'infra/datasources/external/register_datasource.dart';
 import 'infra/datasources/internal/register_local_database.dart';
-import 'infra/mappers/register_mapper.dart';
+import 'infra/repositories/mappers/register_mapper.dart';
 import 'infra/repositories/datasources/register_local_database_interface.dart';
-import 'infra/repositories/models/register_model.dart';
+import 'infra/models/register_model.dart';
 import 'infra/repositories/register_repository.dart';
 
 class RegisterIsolateModule extends Module {
