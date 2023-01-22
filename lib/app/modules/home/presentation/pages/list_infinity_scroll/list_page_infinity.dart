@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_discovery/app/modules/home/domain/entities/register_entity.dart';
-import 'package:hive_discovery/app/modules/home/presentation/pages/list/list_controller.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:hive_discovery/app/modules/home/presentation/pages/list_infinity_scroll/list_controller.dart';
 
 class ListPage extends StatefulWidget {
   final ListController controller;
@@ -20,9 +19,6 @@ class _ListPageState extends State<ListPage> {
   @override
   void initState() {
     super.initState();
-    controller.pagingController.addPageRequestListener((pageKey) {
-      controller.nextPage(pageKey);
-    });
   }
 
   @override
@@ -64,29 +60,24 @@ class _ListPageState extends State<ListPage> {
                 );
               } else {
                 return ValueListenableBuilder(
-                  valueListenable: controller.currentPageData,
-                  builder: (__, List<RegisterEntity> value, _) {
-                    return Expanded(
-                        child: PagedListView<int, RegisterEntity>.separated(
-                      pagingController: controller.pagingController,
-                      separatorBuilder: (context, index) => const Divider(),
-                      builderDelegate:
-                          PagedChildBuilderDelegate<RegisterEntity>(
-                        animateTransitions: true,
-                        // [transitionDuration] has a default value of 250 milliseconds.
-                        transitionDuration: const Duration(milliseconds: 500),
-                        itemBuilder: (context, item, index) => ColoredBox(
-                          color: index % 2 == 0
-                              ? Colors.green.withOpacity(.3)
-                              : Colors.purple.withOpacity(.3),
-                          child: ListTile(
-                            title: Text(item.name),
-                          ),
+                    valueListenable: controller.listFiltered,
+                    builder: (_, List<RegisterEntity> value, __) {
+                      return Expanded(
+                        child: ListView.builder(
+                          itemCount: value.length,
+                          itemBuilder: (_, index) {
+                            final item = value[index];
+                            return ColoredBox(
+                                color: index % 2 == 0
+                                    ? Colors.green.withOpacity(.3)
+                                    : Colors.purple.withOpacity(.3),
+                                child: ListTile(
+                                  title: Text(item.name),
+                                ));
+                          },
                         ),
-                      ),
-                    ));
-                  },
-                );
+                      );
+                    });
               }
             },
           ),

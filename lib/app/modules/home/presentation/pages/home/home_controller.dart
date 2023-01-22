@@ -3,6 +3,7 @@ import 'dart:isolate';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hive_discovery/app/modules/home/domain/usecases/clear_register.dart';
 
 import '../../../domain/entities/register_entity.dart';
 import '../../../domain/usecases/get_register.dart';
@@ -13,12 +14,19 @@ import '../../../register_isolate_module.dart';
 class HomeController {
   final GetRegister getRegister;
   final RegisterLocalDatabaseUsecase registerLocalDatabaseUsecase;
+  final ClearRegisters clearRegisters;
   ValueNotifier<bool> loading = ValueNotifier(false);
+  ValueNotifier<double?> percent = ValueNotifier(null);
 
   HomeController({
     required this.getRegister,
     required this.registerLocalDatabaseUsecase,
+    required this.clearRegisters,
   });
+
+  Future clear() async {
+    await clearRegisters();
+  }
 
   Future get() async {
     loading.value = true;
@@ -40,9 +48,11 @@ class HomeController {
         debugPrint('DONE');
         isolate.kill(priority: Isolate.immediate);
         loading.value = false;
+        percent.value = null;
         registerLocalDatabaseUsecase(message);
       } else {
-        debugPrint('$message%');
+        percent.value = (message * 100) / 500;
+        debugPrint('${percent.value}%');
       }
     });
   }
@@ -52,12 +62,12 @@ class HomeController {
     SendPort sendPort = values[0];
     final getRegisterPerPage = Modular.get<GetRegisterPerPage>();
     final registers = <RegisterEntity>[];
-    for (var i = 0; i < 5; i++) {
+    int i = 0;
+    for (i = 0; i < 500; i++) {
       final result = await getRegisterPerPage(i);
       registers.addAll(result);
       sendPort.send(i + 1);
     }
-
     sendPort.send(registers);
   }
 }

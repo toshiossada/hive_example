@@ -45,13 +45,32 @@ class _HomePageState extends State<HomePage> {
               },
               child: const Text('Filter'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Modular.to.pushNamed('listInfinity');
+              },
+              child: const Text('Filter With Infinity Scroll'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                controller.clear();
+              },
+              child: const Text('Clear'),
+            ),
             ValueListenableBuilder(
                 valueListenable: controller.loading,
-                builder: (context, value, child) {
-                  return Visibility(
-                    visible: value,
-                    child: const CircularProgressIndicator(),
-                  );
+                builder: (_, loading, __) {
+                  return ValueListenableBuilder(
+                      valueListenable: controller.percent,
+                      builder: (_, percent, __) {
+                        if (percent != null) {
+                          return Text('$percent%');
+                        }
+                        return Visibility(
+                          visible: loading,
+                          child: const CircularProgressIndicator(),
+                        );
+                      });
                 }),
           ],
         ),
