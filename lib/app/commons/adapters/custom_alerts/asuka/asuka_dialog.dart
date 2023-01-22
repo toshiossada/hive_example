@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../dialog_adapter.dart';
 
-typedef FShowDialog = void Function(Widget);
+typedef FShowDialog = Future Function(Widget);
 typedef FAlert = void Function(String);
 
 class AsukaDialog implements IDialogAdapter {
@@ -15,8 +15,8 @@ class AsukaDialog implements IDialogAdapter {
   });
 
   @override
-  void showDialog(Widget child) {
-    fShowDialog(child);
+  Future<T> showDialog<T>(Widget child) async {
+    return await fShowDialog(child);
   }
 
   @override

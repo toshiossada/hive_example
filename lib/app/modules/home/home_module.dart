@@ -10,11 +10,11 @@ import 'domain/usecases/register_local_database_usecase.dart';
 import 'domain/usecases/search_local_database.dart';
 import 'infra/datasources/external/register_datasource.dart';
 import 'infra/datasources/internal/register_local_database.dart';
-import 'infra/repositories/mappers/register_mapper.dart';
+import 'infra/models/register_model.dart';
 import 'infra/repositories/datasources/register_datasource_interface.dart';
 import 'infra/repositories/datasources/register_local_database_interface.dart';
 import 'infra/repositories/local_register_repository.dart';
-import 'infra/models/register_model.dart';
+import 'infra/repositories/mappers/register_mapper.dart';
 import 'infra/repositories/register_repository.dart';
 import 'presentation/pages/home/home_controller.dart';
 import 'presentation/pages/home/home_page.dart';
@@ -25,6 +25,7 @@ class HomeModule extends Module {
   List<Bind> get binds => [
         Bind.factory((i) => ListController(
               searchLocalDatabase: i(),
+              dialog: i(),
             )),
         Bind.factory((i) => HomeController(
               getRegister: i(),

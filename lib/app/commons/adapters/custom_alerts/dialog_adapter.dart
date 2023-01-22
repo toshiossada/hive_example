@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-abstract class IDialogAdapter {
-  void showDialog(Widget child);
+abstract class IDialogAdapter<T> {
+  Future<T> showDialog<T>(Widget child);
   void alertSnackBar(String text);
 }

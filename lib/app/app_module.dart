@@ -12,8 +12,11 @@ import 'commons/adapters/http_client/http_client_adapter.dart';
 class AppModule extends Module {
   @override
   final List<Bind> binds = [
-    Bind.factory<FShowDialog>((i) => (Widget child) {
-          Asuka.showDialog(builder: (context) => child);
+    Bind.factory<FShowDialog>((i) => (Widget child) async {
+          return await Asuka.showDialog(builder: (context) => child);
+        }),
+    Bind.factory<FAlert>((i) => (String text) {
+          AsukaSnackbar.alert("success").show();
         }),
     Bind.factory(
       (i) => Dio(BaseOptions(baseUrl: 'http://10.0.2.2:3000/')),

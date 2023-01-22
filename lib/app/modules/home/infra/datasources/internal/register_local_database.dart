@@ -37,7 +37,7 @@ class RegisterLocalDatasource implements IRegisterLocalDatasource {
 
     final box = await completer.future;
     await clear();
-    //await box.put('registers', model);
+
     await box.addAll(model);
     model.map((e) async => await e.save());
   }

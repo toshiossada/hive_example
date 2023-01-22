@@ -9,6 +9,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Modular.setObservers([Asuka.asukaHeroController]);
     return MaterialApp.router(
+      builder: Asuka.builder,
       debugShowCheckedModeBanner: false,
       title: '',
       routeInformationParser: Modular.routeInformationParser,
