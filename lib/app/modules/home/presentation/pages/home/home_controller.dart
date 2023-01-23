@@ -48,17 +48,25 @@ class HomeController {
     );
 
     port.listen((message) {
-      if (message is List<RegisterEntity>) {
-        debugPrint('DONE');
-        isolate.kill(priority: Isolate.immediate);
-        loading.value = false;
-        percent.value = null;
-        registerLocalDatabaseUsecase(message);
-      } else {
-        percent.value = (message * 100) / maxPage;
-        debugPrint('${percent.value}%');
-      }
+      onData(message, isolate);
     });
+  }
+
+  Future<void> onDone(List<RegisterEntity> data) async {
+    await registerLocalDatabaseUsecase(data);
+    loading.value = false;
+    percent.value = null;
+    debugPrint('DONE');
+  }
+
+  Future<void> onData(dynamic message, Isolate isolate) async {
+    if (message is List<RegisterEntity>) {
+      await onDone(message);
+      isolate.kill(priority: Isolate.immediate);
+    } else {
+      percent.value = (message * 100) / maxPage;
+      debugPrint('${percent.value}%');
+    }
   }
 
   static execIsolate(Map<String, dynamic> values) async {
