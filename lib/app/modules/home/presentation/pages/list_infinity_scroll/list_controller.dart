@@ -25,9 +25,6 @@ class ListController {
   final PagingController<int, RegisterEntity> pagingController =
       PagingController(firstPageKey: 1);
 
-
-
-
   showFilter() async {
     final filterDialog = await dialog.showDialog<String?>(FilterWidget(
       initialFilter: filter,
@@ -41,7 +38,12 @@ class ListController {
       listFiltered.value = list.value
           .where(
             (element) =>
-                element.name.toUpperCase().contains(filter.toUpperCase()),
+                element.fields['name']
+                    .toUpperCase()
+                    .contains(filter.toUpperCase()) ||
+                element.fields['email']
+                    .toUpperCase()
+                    .contains(filter.toUpperCase()),
           )
           .toList();
     }

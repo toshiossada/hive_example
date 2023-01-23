@@ -71,9 +71,10 @@ class HomeController {
 
   static execIsolate(Map<String, dynamic> values) async {
     Modular.init(RegisterIsolateModule());
+    final getRegisterPerPage = Modular.get<GetRegisterPerPage>();
+
     SendPort sendPort = values['sendPort'];
     int maxPages = values['maxPages'];
-    final getRegisterPerPage = Modular.get<GetRegisterPerPage>();
     final registers = <RegisterEntity>[];
 
     for (int i = 0; i < maxPages; i++) {

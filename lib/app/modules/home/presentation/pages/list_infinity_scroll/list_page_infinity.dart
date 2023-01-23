@@ -31,11 +31,21 @@ class _ListPageState extends State<ListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: ValueListenableBuilder(
-          valueListenable: controller.list,
-          builder: (__, List<RegisterEntity> value, _) {
-            return Text('${value.length} Registros');
-          },
+        title: Row(
+          children: [
+            ValueListenableBuilder(
+              valueListenable: controller.listFiltered,
+              builder: (__, List<RegisterEntity> value, _) {
+                return Text('${value.length}/');
+              },
+            ),
+            ValueListenableBuilder(
+              valueListenable: controller.list,
+              builder: (__, List<RegisterEntity> value, _) {
+                return Text('${value.length} Registros');
+              },
+            ),
+          ],
         ),
         actions: [
           IconButton(
@@ -72,7 +82,8 @@ class _ListPageState extends State<ListPage> {
                                     ? Colors.green.withOpacity(.3)
                                     : Colors.purple.withOpacity(.3),
                                 child: ListTile(
-                                  title: Text(item.name),
+                                  title: Text(item.fields['name']),
+                                  subtitle: Text(item.fields['email']),
                                 ));
                           },
                         ),

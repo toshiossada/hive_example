@@ -9,6 +9,12 @@ class RegisterLocalDatabaseUsecase {
   });
 
   Future call(List<RegisterEntity> registers) async {
-    await localRepository.registerLocal(registers);
+    final d = registers
+        .asMap()
+        .entries
+        .map((entry) => entry.value.copyWith(fields: {'row': entry.key}))
+        .toList();
+
+    await localRepository.registerLocal(d);
   }
 }

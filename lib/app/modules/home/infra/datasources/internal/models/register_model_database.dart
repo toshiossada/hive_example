@@ -9,22 +9,27 @@ class RegisterModelDatabase extends HiveObject {
   final int id;
   @HiveField(1, defaultValue: '')
   final String name;
+  @HiveField(2, defaultValue: {})
+  final Map<String, dynamic> field;
 
   RegisterModelDatabase({
     required this.id,
     required this.name,
+    required this.field,
   });
 
   factory RegisterModelDatabase.fromModel(RegisterModel model) {
     return RegisterModelDatabase(
       id: model.id,
       name: model.name,
+      field: model.fields,
     );
   }
   RegisterModel toModel() {
     return RegisterModel(
       id: id,
       name: name,
+      fields: field,
     );
   }
 }

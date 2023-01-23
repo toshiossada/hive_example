@@ -8,6 +8,7 @@ class RegisterMapper implements BaseMapper<RegisterEntity, RegisterModel> {
     return RegisterEntity(
       id: model.id,
       name: model.name,
+      fields: model.fields,
     );
   }
 
@@ -16,6 +17,7 @@ class RegisterMapper implements BaseMapper<RegisterEntity, RegisterModel> {
     return RegisterModel(
       id: entity.id,
       name: entity.name,
+      fields: entity.fields,
     );
   }
 }

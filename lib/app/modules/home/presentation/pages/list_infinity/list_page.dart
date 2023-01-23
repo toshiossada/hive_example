@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hive_discovery/app/modules/home/domain/entities/register_entity.dart';
-import 'package:hive_discovery/app/modules/home/presentation/pages/list_infinity_scroll/list_controller.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import 'list_controller_infinity_sroll.dart';
@@ -37,11 +36,21 @@ class _ListPageInfinityScrollState extends State<ListPageInfinityScroll> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: ValueListenableBuilder(
-          valueListenable: controller.list,
-          builder: (__, List<RegisterEntity> value, _) {
-            return Text('${value.length} Registros');
-          },
+        title: Row(
+          children: [
+            ValueListenableBuilder(
+              valueListenable: controller.listFiltered,
+              builder: (__, List<RegisterEntity> value, _) {
+                return Text('${value.length}/');
+              },
+            ),
+            ValueListenableBuilder(
+              valueListenable: controller.list,
+              builder: (__, List<RegisterEntity> value, _) {
+                return Text('${value.length} Registros');
+              },
+            ),
+          ],
         ),
         actions: [
           IconButton(
