@@ -34,13 +34,17 @@ class HomeController {
     loading.value = false;
   }
 
+  final maxPage = 1000;
   Future getRegisterPerPage() async {
     loading.value = true;
     ReceivePort port = ReceivePort();
 
-    final isolate = await Isolate.spawn<List<dynamic>>(
+    final isolate = await Isolate.spawn<Map<String, dynamic>>(
       execIsolate,
-      [port.sendPort],
+      {
+        'sendPort': port.sendPort,
+        'maxPages': maxPage,
+      },
     );
 
     port.listen((message) {
@@ -51,19 +55,20 @@ class HomeController {
         percent.value = null;
         registerLocalDatabaseUsecase(message);
       } else {
-        percent.value = (message * 100) / 500;
+        percent.value = (message * 100) / maxPage;
         debugPrint('${percent.value}%');
       }
     });
   }
 
-  static execIsolate(List values) async {
+  static execIsolate(Map<String, dynamic> values) async {
     Modular.init(RegisterIsolateModule());
-    SendPort sendPort = values[0];
+    SendPort sendPort = values['sendPort'];
+    int maxPages = values['maxPages'];
     final getRegisterPerPage = Modular.get<GetRegisterPerPage>();
     final registers = <RegisterEntity>[];
-    int i = 0;
-    for (i = 0; i < 500; i++) {
+
+    for (int i = 0; i < maxPages; i++) {
       final result = await getRegisterPerPage(i);
       registers.addAll(result);
       sendPort.send(i + 1);

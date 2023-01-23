@@ -37,12 +37,15 @@ class RegisterRepository implements IRegisterRepository {
     final datasource = Modular.get<IRegisterDatasource>();
 
     final data = <RegisterModel>[];
-    for (var i = 0; i < 500; i++) {
+    const maxPage = 500;
+    for (var i = 0; i < maxPage; i++) {
       final d = await datasource.getRegisters();
       data.addAll(d.map((e) => e.copyWith(id: i)));
-      debugPrint('$i - ${data.length}');
+      final percent = (i * 100) / maxPage;
+      debugPrint('$percent% - ${data.length}');
     }
 
+    debugPrint('DONE');
     return data;
   }
 }
