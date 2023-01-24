@@ -8,8 +8,16 @@ class SearchLocalDatabase {
     required this.localRepository,
   });
 
-  Future<List<RegisterEntity>> call() async {
-    final result = await localRepository.get();
+  Future<List<RegisterEntity>> call({
+    int pageSize = 0,
+    int currentPage = 1,
+    Map<String, dynamic>? filter,
+  }) async {
+    final result = await localRepository.get(
+      pageSize: pageSize,
+      currentPage: currentPage,
+      filter: filter,
+    );
 
     return result;
   }

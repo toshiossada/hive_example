@@ -19,7 +19,7 @@ class RegisterModelDatabaseAdapter extends TypeAdapter<RegisterModelDatabase> {
     return RegisterModelDatabase(
       id: fields[0] == null ? 0 : fields[0] as int,
       name: fields[1] == null ? '' : fields[1] as String,
-      field:
+      fields:
           fields[2] == null ? {} : (fields[2] as Map).cast<String, dynamic>(),
     );
   }
@@ -33,7 +33,7 @@ class RegisterModelDatabaseAdapter extends TypeAdapter<RegisterModelDatabase> {
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.field);
+      ..write(obj.fields);
   }
 
   @override

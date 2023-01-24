@@ -18,10 +18,10 @@ import 'infra/repositories/mappers/register_mapper.dart';
 import 'infra/repositories/register_repository.dart';
 import 'presentation/pages/home/home_controller.dart';
 import 'presentation/pages/home/home_page.dart';
-import 'presentation/pages/list_infinity/list_controller_infinity_sroll.dart';
-import 'presentation/pages/list_infinity/list_page.dart';
-import 'presentation/pages/list_infinity_scroll/list_controller.dart';
-import 'presentation/pages/list_infinity_scroll/list_page_infinity.dart';
+import 'presentation/pages/list_infinity/list_infinity_controller.dart';
+import 'presentation/pages/list_infinity/list_infinity_page.dart';
+import 'presentation/pages/list/list_controller.dart';
+import 'presentation/pages/list/list_page.dart';
 
 class HomeModule extends Module {
   @override

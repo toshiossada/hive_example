@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_discovery/app/modules/home/domain/entities/register_entity.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-import 'list_controller_infinity_sroll.dart';
+import 'list_infinity_controller.dart';
 
 class ListPageInfinityScroll extends StatefulWidget {
   final ListControllerInfinityScroll controller;
@@ -39,7 +39,7 @@ class _ListPageInfinityScrollState extends State<ListPageInfinityScroll> {
         title: Row(
           children: [
             ValueListenableBuilder(
-              valueListenable: controller.listFiltered,
+              valueListenable: controller.list,
               builder: (__, List<RegisterEntity> value, _) {
                 return Text('${value.length}/');
               },
@@ -75,7 +75,7 @@ class _ListPageInfinityScrollState extends State<ListPageInfinityScroll> {
                 );
               } else {
                 return ValueListenableBuilder(
-                  valueListenable: controller.currentPageData,
+                  valueListenable: controller.list,
                   builder: (__, List<RegisterEntity> value, _) {
                     return Expanded(
                         child: PagedListView<int, RegisterEntity>.separated(
@@ -90,7 +90,8 @@ class _ListPageInfinityScrollState extends State<ListPageInfinityScroll> {
                               ? Colors.green.withOpacity(.3)
                               : Colors.purple.withOpacity(.3),
                           child: ListTile(
-                            title: Text(item.name),
+                            title: Text(item.fields['name']),
+                            subtitle: Text(item.fields['email']),
                           ),
                         ),
                       ),

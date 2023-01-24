@@ -21,8 +21,16 @@ class LocalRegisterRepository implements ILocalRegisterRepository {
   }
 
   @override
-  Future<List<RegisterEntity>> get() async {
-    final registers = await registerLocalDatasource.get();
+  Future<List<RegisterEntity>> get({
+    int pageSize = 0,
+    int currentPage = 1,
+    Map<String, dynamic>? filter,
+  }) async {
+    final registers = await registerLocalDatasource.getWhere(
+      pageSize: pageSize,
+      currentPage: currentPage,
+      filter: filter,
+    );
     return registers.map((e) => mapper.toEntity(e)).toList();
   }
 

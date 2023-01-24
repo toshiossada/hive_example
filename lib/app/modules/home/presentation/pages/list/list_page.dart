@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_discovery/app/modules/home/domain/entities/register_entity.dart';
-import 'package:hive_discovery/app/modules/home/presentation/pages/list_infinity_scroll/list_controller.dart';
+import 'package:hive_discovery/app/modules/home/presentation/pages/list/list_controller.dart';
 
 class ListPage extends StatefulWidget {
   final ListController controller;
@@ -34,12 +34,6 @@ class _ListPageState extends State<ListPage> {
         title: Row(
           children: [
             ValueListenableBuilder(
-              valueListenable: controller.listFiltered,
-              builder: (__, List<RegisterEntity> value, _) {
-                return Text('${value.length}/');
-              },
-            ),
-            ValueListenableBuilder(
               valueListenable: controller.list,
               builder: (__, List<RegisterEntity> value, _) {
                 return Text('${value.length} Registros');
@@ -70,7 +64,7 @@ class _ListPageState extends State<ListPage> {
                 );
               } else {
                 return ValueListenableBuilder(
-                    valueListenable: controller.listFiltered,
+                    valueListenable: controller.list,
                     builder: (_, List<RegisterEntity> value, __) {
                       return Expanded(
                         child: ListView.builder(
