@@ -12,6 +12,7 @@ class AppWidget extends StatelessWidget {
       builder: Asuka.builder,
       debugShowCheckedModeBanner: false,
       title: '',
+      //routerConfig: Modular.routerConfig,
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
     ); //

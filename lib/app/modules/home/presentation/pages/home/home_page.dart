@@ -95,6 +95,12 @@ class _HomePageState extends State<HomePage> {
               );
             }),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Modular.to.pushNamed('animation');
+        },
+        child: const Icon(Icons.animation),
+      ),
     );
   }
 }

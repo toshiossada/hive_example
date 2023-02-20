@@ -16,12 +16,13 @@ import 'infra/repositories/datasources/register_local_database_interface.dart';
 import 'infra/repositories/local_register_repository.dart';
 import 'infra/repositories/mappers/register_mapper.dart';
 import 'infra/repositories/register_repository.dart';
+import 'presentation/pages/animation/animation_page.dart';
 import 'presentation/pages/home/home_controller.dart';
 import 'presentation/pages/home/home_page.dart';
-import 'presentation/pages/list_infinity/list_infinity_controller.dart';
-import 'presentation/pages/list_infinity/list_infinity_page.dart';
 import 'presentation/pages/list/list_controller.dart';
 import 'presentation/pages/list/list_page.dart';
+import 'presentation/pages/list_infinity/list_infinity_controller.dart';
+import 'presentation/pages/list_infinity/list_infinity_page.dart';
 
 class HomeModule extends Module {
   @override
@@ -78,6 +79,10 @@ class HomeModule extends Module {
         ChildRoute(
           '/',
           child: (_, args) => HomePage(controller: Modular.get()),
+        ),
+        ChildRoute(
+          '/animation',
+          child: (_, args) => const AnimationPage(),
         ),
         ChildRoute(
           '/list',

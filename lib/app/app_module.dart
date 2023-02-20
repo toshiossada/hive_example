@@ -30,11 +30,11 @@ class AppModule extends Module {
       (i) => DioAdapter(dio: i(), interceptors: []),
       export: true,
     ),
-    Bind.factory(
-      (i) => Dio(BaseOptions(baseUrl: 'http://10.0.2.2:3000/')),
-    ),
     Bind.factory<IHttpClientAdapter>(
       (i) => DioAdapter(dio: i(), interceptors: []),
+    ),
+    Bind.factory(
+      (i) => Dio(BaseOptions(baseUrl: 'http://10.0.2.2:3000/')),
     ),
   ];
 
