@@ -19,11 +19,11 @@ dependencies:
     #   url: https://github.com/Flutterando/modular.git
     #   path: flutter_modular
     #   ref: modular_6
-  dio: ^4.0.6
-  flutter_modular: ^5.0.3
-  path_provider: ^2.0.11
-  asuka: ^2.0.1+3
-  infinite_scroll_pagination: ^3.2.0
+  dio: ^5.4.3+1
+  flutter_modular: ^6.3.4
+  path_provider: ^2.1.3
+  asuka: ^2.2.1
+  infinite_scroll_pagination: ^4.0.0
   faker: ^2.1.0
 
 dev_dependencies:

@@ -47,7 +47,7 @@ class CustomInterceptors extends InterceptorsWrapper {
 
   @override
   void onError(
-    DioError err,
+    DioException err,
     ErrorInterceptorHandler handler,
   ) {
     HttpClientError failure;

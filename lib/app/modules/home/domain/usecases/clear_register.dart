@@ -8,6 +8,6 @@ class ClearRegisters {
   });
 
   Future call() async {
-    final result = await localRepository.clear();
+    final _ = await localRepository.clear();
   }
 }

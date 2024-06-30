@@ -32,12 +32,13 @@ class DioAdapter implements IHttpClientAdapter {
         statusCode: result.statusCode ?? 200,
       );
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw HttpClientError(
         data: e.response?.data,
         statusCode: e.response?.statusCode ?? 500,
-        type: DioErrorType.response,
-        message: e.message,
+        type: DioExceptionType.badResponse,
+        stackTrace: e.stackTrace,
+        message: e.message ?? '',
         requestOptions: e.requestOptions,
       );
     }
@@ -62,13 +63,14 @@ class DioAdapter implements IHttpClientAdapter {
         statusCode: result.statusCode ?? 200,
       );
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw HttpClientError(
         data: e.response?.data,
         statusCode: e.response?.statusCode ?? 500,
-        type: DioErrorType.response,
-        message: e.message,
+        type: DioExceptionType.badResponse,
+        message: e.message ?? '',
         requestOptions: e.requestOptions,
+        stackTrace: e.stackTrace,
       );
     }
   }
@@ -92,13 +94,14 @@ class DioAdapter implements IHttpClientAdapter {
         statusCode: result.statusCode ?? 200,
       );
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw HttpClientError(
         data: e.response?.data,
         statusCode: e.response?.statusCode ?? 500,
-        type: DioErrorType.response,
-        message: e.message,
+        type: DioExceptionType.badResponse,
+        message: e.message ?? '',
         requestOptions: e.requestOptions,
+        stackTrace: e.stackTrace,
       );
     }
   }
@@ -122,13 +125,14 @@ class DioAdapter implements IHttpClientAdapter {
         statusCode: result.statusCode ?? 200,
       );
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw HttpClientError(
         data: e.response?.data,
         statusCode: e.response?.statusCode ?? 500,
-        type: DioErrorType.response,
-        message: e.message,
+        type: DioExceptionType.badResponse,
+        message: e.message ?? '',
         requestOptions: e.requestOptions,
+        stackTrace: e.stackTrace,
       );
     }
   }

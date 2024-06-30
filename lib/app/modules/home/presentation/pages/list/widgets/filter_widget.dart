@@ -12,7 +12,7 @@ class FilterWidget extends StatefulWidget {
 }
 
 class _FilterWidgetState extends State<FilterWidget> {
-  late final txtFilter;
+  late final TextEditingController txtFilter;
   @override
   void initState() {
     // TODO: implement initState

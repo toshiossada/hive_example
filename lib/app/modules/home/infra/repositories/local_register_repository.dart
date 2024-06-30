@@ -1,13 +1,12 @@
-import 'package:hive_discovery/app/commons/base_mapper.dart';
 import 'package:hive_discovery/app/modules/home/domain/entities/register_entity.dart';
 
 import '../../domain/repositories/local_register_repository.dart';
-import '../models/register_model.dart';
 import 'datasources/register_local_database_interface.dart';
+import 'register_repository.dart';
 
 class LocalRegisterRepository implements ILocalRegisterRepository {
   final IRegisterLocalDatasource registerLocalDatasource;
-  final BaseMapper<RegisterEntity, RegisterModel> mapper;
+  final RegisterMapperType mapper;
 
   LocalRegisterRepository({
     required this.mapper,

@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 void main() {
   final funcionario = Funcionario(TipoContratacao.clt);
   final funcionario2 = Funcionario(TipoContratacao.pj);
-  print(funcionario.igual(funcionario2));
-  print(funcionario.differenca(funcionario2));
+  debugPrint(funcionario.igual(funcionario2).toString());
+  debugPrint(funcionario.differenca(funcionario2).toString());
 }
 
 abstract class Comparar<T> {

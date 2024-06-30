@@ -29,12 +29,15 @@ class HomeController {
   }
 
   Future get() async {
-    loading.value = true;
-    await getRegister();
-    loading.value = false;
+    try {
+      loading.value = true;
+      await getRegister();
+    } finally {
+      loading.value = false;
+    }
   }
 
-  final maxPage = 1000;
+  final maxPage = 22;
   Future getRegisterPerPage() async {
     loading.value = true;
     ReceivePort port = ReceivePort();
@@ -60,12 +63,16 @@ class HomeController {
   }
 
   Future<void> onData(dynamic message, Isolate isolate) async {
-    if (message is List<RegisterEntity>) {
-      await onDone(message);
-      isolate.kill(priority: Isolate.immediate);
-    } else {
-      percent.value = (message * 100) / maxPage;
-      debugPrint('${percent.value}%');
+    try {
+      if (message is List<RegisterEntity>) {
+        await onDone(message);
+        isolate.kill(priority: Isolate.immediate);
+      } else {
+        percent.value = (message * 100) / maxPage;
+        debugPrint('${percent.value}%');
+      }
+    } finally {
+      loading.value = false;
     }
   }
 
